@@ -1,19 +1,21 @@
 import React from 'react';
-import { ContactForm } from '../ContactForm/ContactForm';
-import { ContactsList } from '../ContactsList/ContactsList';
-import { SearchContact } from '../SearchContact/SearchContact';
-import { AppWrapper, PhoneBook } from './App.styled';
+import { Route, Routes } from 'react-router-dom';
+import RegisterPage from 'pages/RegisterPage';
+import LoginPage from 'pages/LoginPage';
+import ContactsPage from 'pages/ContactsPage';
+import Layout from 'Layout/Layout';
 
 export const App = () => {
   return (
-    <AppWrapper>
-      <PhoneBook>
-        <h3>Phonebook</h3>
-        <ContactForm />
-        <h3>Contacts</h3>
-        <SearchContact />
-        <ContactsList />
-      </PhoneBook>
-    </AppWrapper>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+        </Route>
+        <Route path="*" element={<h1>404 not found!</h1>}></Route>
+      </Routes>
+    </>
   );
 };

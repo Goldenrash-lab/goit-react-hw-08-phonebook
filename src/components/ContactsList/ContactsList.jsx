@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { DeleteBtn, ContactItem } from './ContactsList.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContactThunk, fetchContactsThunk } from 'store/contactsThunk';
+import { deleteContactThunk, fetchContactsThunk } from 'store/contacts/contactsThunk';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();

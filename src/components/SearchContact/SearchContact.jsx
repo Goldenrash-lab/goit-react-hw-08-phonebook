@@ -2,7 +2,7 @@ import React from 'react';
 import { SearchWrapper } from './SearchContact.styled';
 import { Input } from 'components/ContactForm/ContactForm.styled';
 import { useDispatch } from 'react-redux';
-import { searchContact } from 'store/contactsSlice';
+import { searchContact } from 'store/contacts/contactsSlice';
 
 export const SearchContact = () => {
   const dispatch = useDispatch();
