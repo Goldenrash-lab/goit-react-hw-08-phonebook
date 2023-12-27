@@ -2,33 +2,49 @@ import { Button, Card, CardBody, Heading, Input } from '@chakra-ui/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { signUpThunk } from 'store/auth/thunks';
 
 const RegisterPage = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   function submit(data) {
-    dispatch(signUpThunk(data));
+    dispatch(signUpThunk(data))
+      .unwrap()
+      .then(() => {
+        navigate('/contacts');
+        return toast.success("You're logined!");
+      })
+      .catch(err => {
+        toast.error(err);
+      });
   }
   return (
     <>
-      <Heading as="h2">Sign Up</Heading>
-      <Card maxW="md">
+      <Card maxW="md" mx="auto" p="6">
+        <Heading as="h2" textAlign="center" mb="8">
+          Sign Up
+        </Heading>
         <CardBody>
           <form onSubmit={handleSubmit(submit)}>
-            <label htmlFor="name">
+            <label htmlFor="name_reg">
               Name
-              <Input {...register('name')} type="text" name="name" />
+              <Input mb="5" {...register('name')} type="text" name="name" id="name_reg" />
             </label>
-            <label htmlFor="email">
+            <label htmlFor="email_reg">
               Email
-              <Input {...register('email')} type="text" name="email" />
+              <Input mb="5" {...register('email')} type="text" name="email" id="email_reg" />
             </label>
-            <label htmlFor="password">
+            <label htmlFor="pass_reg">
               Password
-              <Input marginBottom="15px" {...register('password')} type="text" name="password" />
+              <Input mb="5" marginBottom="15px" {...register('password')} type="text" name="password" id="pass_reg" />
             </label>
-            <Button colorScheme="teal">Sign Up</Button>
+            <Button type="submit" colorScheme="teal">
+              Sign Up
+            </Button>
           </form>
         </CardBody>
       </Card>

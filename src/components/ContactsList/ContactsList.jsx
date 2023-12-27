@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { DeleteBtn, ContactItem } from './ContactsList.styled';
+import { ContactItem } from './ContactsList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContactThunk, fetchContactsThunk } from 'store/contacts/contactsThunk';
+import { Button } from '@chakra-ui/react';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
@@ -28,16 +29,18 @@ export const ContactsList = () => {
       {filteredContacts().map(el => (
         <ContactItem key={el.id}>
           <h4>
-            {el.name}: {el.phone}
+            {el.name}: {el.number}
           </h4>
-          <DeleteBtn
+          <Button
+            colorScheme="red"
+            variant="outline"
             onClick={() => {
               handleDelete(el.id);
             }}
             type="button"
           >
             DELETE
-          </DeleteBtn>
+          </Button>
         </ContactItem>
       ))}
     </ul>

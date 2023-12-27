@@ -1,31 +1,48 @@
+import { Button, Card, CardBody, Heading, Input } from '@chakra-ui/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { signInThunk } from 'store/auth/thunks';
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function submit(data) {
-    console.log(data);
-    dispatch(signInThunk(data));
+    dispatch(signInThunk(data))
+      .unwrap()
+      .then(() => {
+        navigate('/contacts');
+        return toast.success("You're logined!");
+      })
+      .catch(() => toast.error('Something went wrong!'));
   }
 
   return (
     <>
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit(submit)}>
-        <label htmlFor="email">
-          Email
-          <input {...register('email')} type="email" name="email" />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input {...register('password')} type="password" name="password" />
-        </label>
-        <button>Login</button>
-      </form>
+      <Card mx="auto" maxW="sm" p="6">
+        <Heading as="h2" textAlign="center" mb="10">
+          Sign In
+        </Heading>
+        <CardBody>
+          <form onSubmit={handleSubmit(submit)}>
+            <label htmlFor="email_login">
+              Email
+              <Input mb="5" {...register('email')} type="email" name="email" id="email_login" />
+            </label>
+            <label htmlFor="pass_login">
+              Password
+              <Input mb="5" {...register('password')} type="password" name="password" id="pass_login" />
+            </label>
+            <Button type="submit" colorScheme="teal">
+              Login
+            </Button>
+          </form>
+        </CardBody>
+      </Card>
     </>
   );
 };

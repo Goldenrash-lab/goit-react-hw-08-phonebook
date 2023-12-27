@@ -1,5 +1,5 @@
+import { Button, Input } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { Input, Button } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContactThunk } from 'store/contacts/contactsThunk';
 
@@ -21,14 +21,15 @@ export const ContactForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     let isExists = contacts.some(el => el.name === name);
-
+    // let isExists = false;
     const newContact = {
       name,
-      phone: number,
+      number,
     };
     if (isExists) {
       alert(`${name} is already in contacts`);
     } else {
+      console.log(newContact);
       dispatch(addContactThunk(newContact));
       setName('');
       setNumber('');
@@ -38,10 +39,12 @@ export const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="name">Name</label>
-      <Input id="name" onChange={handlerChangeName} type="text" name="name" value={name} required />
+      <Input mb="15" id="name" onChange={handlerChangeName} type="text" name="name" value={name} required />
       <label htmlFor="phone">Phone</label>
-      <Input id="phone" onChange={handlerChangePhone} type="tel" name="number" value={number} required />
-      <Button type="submit">Add contact</Button>
+      <Input mb="15" id="phone" onChange={handlerChangePhone} type="tel" name="number" value={number} required />
+      <Button colorScheme="teal" type="submit">
+        Add contact
+      </Button>
     </form>
   );
 };

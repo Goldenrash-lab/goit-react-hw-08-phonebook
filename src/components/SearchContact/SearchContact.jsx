@@ -1,8 +1,8 @@
 import React from 'react';
 import { SearchWrapper } from './SearchContact.styled';
-import { Input } from 'components/ContactForm/ContactForm.styled';
 import { useDispatch } from 'react-redux';
 import { searchContact } from 'store/contacts/contactsSlice';
+import { Input } from '@chakra-ui/react';
 
 export const SearchContact = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export const SearchContact = () => {
   return (
     <SearchWrapper>
       <label htmlFor="search">Find contact:</label>
-      <Input onChange={handleChange} type="text" id="search" />
+      <Input mb="15" onChange={handleChange} type="text" id="search" />
     </SearchWrapper>
   );
 };
