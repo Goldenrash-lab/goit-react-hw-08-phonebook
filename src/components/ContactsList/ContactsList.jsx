@@ -3,6 +3,7 @@ import { ContactItem } from './ContactsList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContactThunk, fetchContactsThunk } from 'store/contacts/contactsThunk';
 import { Button } from '@chakra-ui/react';
+import { selectToken, selectUser } from 'store/auth/selectors';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
@@ -11,11 +12,14 @@ export const ContactsList = () => {
   }
 
   const { items, error, isLoading } = useSelector(state => state.contacts.contacts);
+  const user = useSelector(selectUser);
   const { filter } = useSelector(state => state.contacts);
 
   useEffect(() => {
-    dispatch(fetchContactsThunk());
-  }, [dispatch]);
+    if (user) {
+      dispatch(fetchContactsThunk());
+    }
+  }, [dispatch, user]);
 
   function filteredContacts() {
     if (filter) return items.filter(el => el.name.toLowerCase().includes(filter.toLowerCase()));
