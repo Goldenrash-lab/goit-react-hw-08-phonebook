@@ -3,7 +3,7 @@ import { ContactItem } from './ContactsList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContactThunk, fetchContactsThunk } from 'store/contacts/contactsThunk';
 import { Button } from '@chakra-ui/react';
-import { selectToken, selectUser } from 'store/auth/selectors';
+import { selectUser } from 'store/auth/selectors';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
