@@ -25,11 +25,11 @@ const Layout = () => {
                   Register
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbItem p="5">
+              {/* <BreadcrumbItem p="5">
                 <BreadcrumbLink as={NavLink} to="/contacts">
                   Contacts
                 </BreadcrumbLink>
-              </BreadcrumbItem>
+              </BreadcrumbItem> */}
             </>
           )}
         </Breadcrumb>

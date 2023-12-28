@@ -2,20 +2,18 @@ import { Button, Card, CardBody, Heading, Input } from '@chakra-ui/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
 import { signUpThunk } from 'store/auth/thunks';
 
 const RegisterPage = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   function submit(data) {
     dispatch(signUpThunk(data))
       .unwrap()
       .then(() => {
-        navigate('/contacts');
         return toast.success("You're logined!");
       })
       .catch(err => {
